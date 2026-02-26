@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baribefe Gbara — Cloud Engineer | AWS · Kubernetes · Terraform · CI/CD</title>
+<meta name="description" content="Baribefe Gbara is a Cloud Engineer based in Lagos, Nigeria specialising in AWS, Kubernetes, Terraform, and CI/CD pipelines.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://baribefegbara.github.io">
+<meta property="og:title" content="Baribefe Gbara — Cloud Engineer">
+<meta property="og:description" content="AWS · Kubernetes · Terraform · CI/CD — Based in Lagos, Nigeria">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0a0a09;
+  --paper: #f7f4ef;
+  --bg: #e8e3da;
+  --accent: #c8410a;
+  --muted: #6b6460;
+  --rule: #d6d0c6;
+  --tag-bg: #ede9e1;
+  --accent-light: #fdf2eb;
+  --accent-border: #f2d5be;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+section { scroll-margin-top: 80px; }
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(232,227,218,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 40px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.nav-links { display: flex; gap: 32px; list-style: none; }
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* HERO */
+.hero {
+  padding-top: 56px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 600px; height: 600px;
+  background: var(--accent);
+  opacity: 0.04;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 60px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 80px;
+  align-items: center;
+}
+
+.hero-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px; height: 1px;
+  background: var(--accent);
+}
+
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(48px, 7vw, 80px);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.hero-tagline {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.hero-bio {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+  font-weight: 500;
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+.hero-bio strong { color: var(--ink); font-weight: 600; }
+
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary { background: var(--accent); color: white; }
+.btn-primary:hover {
+  background: #a83508;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(200,65,10,0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--rule);
+}
+.btn-outline:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+.hero-stats { display: flex; flex-direction: column; gap: 14px; }
+
+.stat-card {
+  background: white;
+  border: 1px solid var(--rule);
+  padding: 20px 22px;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--accent);
+}
+
+.stat-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 30px;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero-contact {
+  margin-top: 10px;
+  background: var(--tag-bg);
+  border: 1px solid var(--rule);
+  padding: 16px 18px;
+  border-radius: 2px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 4px 0;
+}
+.contact-row a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.contact-row a:hover { color: var(--accent); }
+
+.contact-icon { width: 13px; height: 13px; color: var(--accent); flex-shrink: 0; }
+
+/* SECTIONS */
+.section { padding: 96px 0; background: var(--paper); }
+.section.alt { background: var(--bg); }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 60px; }
+
+.section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 52px; }
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.section-rule { flex: 1; height: 1px; background: var(--rule); }
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.section-sub {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--muted);
+  font-weight: 500;
+  max-width: 520px;
+  margin-bottom: 44px;
+}
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+.about-text p {
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--ink);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.about-text p:last-child { margin-bottom: 0; }
+
+.about-ux-note {
+  margin-top: 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--muted);
+  border-left: 2px solid var(--accent-border);
+  padding-left: 12px;
+}
+.about-ux-note a { color: var(--accent); text-decoration: none; }
+.about-ux-note a:hover { text-decoration: underline; }
+
+.journey-list { display: flex; flex-direction: column; }
+
+.journey-item {
+  display: flex;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px dashed var(--rule);
+}
+.journey-item:last-child { border-bottom: none; }
+
+.journey-dot {
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+  position: relative;
+}
+.journey-dot::after {
+  content: '';
+  position: absolute;
+  top: 8px; left: 3.5px;
+  width: 1px; height: calc(100% + 18px);
+  background: var(--rule);
+}
+.journey-item:last-child .journey-dot::after { display: none; }
+
+.journey-role { font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--ink); margin-bottom: 3px; }
+.journey-org { font-family: 'DM Mono', monospace; font-size: 9.5px; font-weight: 500; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; margin-bottom: 5px; }
+.journey-desc { font-size: 12.5px; line-height: 1.65; color: var(--muted); font-weight: 500; }
+
+/* SKILLS */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+.skill-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 22px 26px;
+  border-radius: 2px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.skill-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.07); }
+
+.skill-card-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.skill-card-label::before { display: none; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.tag {
+  background: var(--tag-bg);
+  border: 1px solid var(--rule);
+  padding: 3px 9px;
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--ink);
+  transition: all 0.2s ease;
+}
+.tag:hover { transform: translateY(-2px); }
+
+/* PROJECTS */
+.projects-list { display: flex; flex-direction: column; gap: 32px; }
+
+.project-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.project-card:hover { transform: translateY(-3px); box-shadow: 0 12px 44px rgba(0,0,0,0.09); }
+
+.project-sidebar {
+  background: var(--tag-bg);
+  border-right: 1px solid var(--rule);
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-num { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--rule); line-height: 1; font-style: italic; margin-bottom: 16px; }
+.project-date { font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.project-org { font-family: 'DM Mono', monospace; font-size: 9.5px; font-weight: 500; color: var(--accent); }
+
+.project-body { padding: 28px 34px; }
+
+.project-title { font-family: 'DM Serif Display', serif; font-size: 21px; color: var(--ink); margin-bottom: 8px; }
+.project-desc { font-size: 13px; line-height: 1.75; color: var(--muted); font-weight: 500; margin-bottom: 16px; }
+
+.project-bullets { list-style: none; margin-bottom: 16px; }
+.project-bullets li { font-size: 12.5px; line-height: 1.7; color: var(--ink); font-weight: 500; padding-left: 16px; position: relative; margin-bottom: 4px; }
+.project-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 9px; top: 4px; }
+
+.tech-row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px; }
+
+.tech-tag {
+  background: transparent;
+  border: 1px solid var(--accent);
+  padding: 2px 7px;
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.project-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid var(--accent-border);
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+.project-link:hover { border-color: var(--accent); }
+
+.project-card.featured .project-sidebar { background: var(--ink); border-right-color: var(--ink); }
+.project-card.featured .project-num { color: rgba(255,255,255,0.08); }
+.project-card.featured .project-date { color: rgba(255,255,255,0.35); }
+.project-card.featured .project-org { color: #f0845a; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--accent-light);
+  border: 1px solid var(--accent-border);
+  padding: 3px 9px;
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+/* EXPERIENCE */
+.exp-list { display: flex; flex-direction: column; }
+
+.exp-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 36px;
+  padding: 32px 0;
+  border-bottom: 1px dashed var(--rule);
+}
+.exp-item:last-child { border-bottom: none; }
+
+.exp-period { font-family: 'DM Mono', monospace; font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.exp-company { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; color: var(--accent); }
+.exp-title { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--ink); margin-bottom: 10px; }
+
+.exp-bullets { list-style: none; }
+.exp-bullets li { font-size: 13.5px; line-height: 1.7; color: var(--ink); font-weight: 500; padding-left: 16px; position: relative; margin-bottom: 4px; }
+.exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 9px; top: 4px; }
+
+.achievement-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  background: var(--accent-light);
+  border: 1px solid var(--accent-border);
+  border-radius: 2px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.achievement-badge::before { content: '★'; font-size: 10px; }
+
+/* EDU */
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+.edu-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 26px;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.edu-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 52px; height: 52px;
+  background: var(--accent);
+  opacity: 0.06;
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+}
+
+.edu-degree { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--ink); margin-bottom: 5px; }
+.edu-school { font-size: 12.5px; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+.edu-year { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent); font-weight: 500; }
+
+/* CONTACT */
+.contact-section { background: var(--ink); padding: 96px 0; }
+
+.contact-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.contact-label { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #f0845a; margin-bottom: 14px; }
+.contact-heading { font-family: 'DM Serif Display', serif; font-size: 38px; color: white; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 16px; }
+.contact-text { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.4); font-weight: 500; }
+
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+
+.contact-link-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.2s;
+  background: rgba(255,255,255,0.02);
+}
+.contact-link-item:hover { border-color: rgba(240,132,90,0.35); background: rgba(240,132,90,0.04); }
+
+.contact-link-icon { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contact-link-icon svg { width: 14px; height: 14px; color: rgba(255,255,255,0.3); }
+
+.contact-link-type { font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #f0845a; display: block; margin-bottom: 2px; }
+.contact-link-value { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.55); }
+
+footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.05); padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; }
+.footer-note { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.18); letter-spacing: 0.08em; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.hero-left  { animation: fadeUp 0.7s ease 0.1s both; }
+.hero-right { animation: fadeUp 0.7s ease 0.3s both; }
+
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { gap: 16px; }
+  .hero-inner { grid-template-columns: 1fr; padding: 56px 24px; gap: 36px; }
+  .container { padding: 0 24px; }
+  .section { padding: 68px 0; }
+  .about-grid, .skills-grid, .edu-grid { grid-template-columns: 1fr; }
+  .project-card { grid-template-columns: 1fr; }
+  .exp-item { grid-template-columns: 1fr; gap: 8px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 36px; padding: 0 24px; }
+  .contact-heading { font-size: 28px; }
+  footer { padding: 16px 24px; flex-direction: column; gap: 6px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Baribefe Gbara</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-label">Cloud Engineer · Lagos, Nigeria</div>
+      <h1>Baribefe<br>Gbara</h1>
+      <p class="hero-tagline">AWS &nbsp;·&nbsp; Kubernetes &nbsp;·&nbsp; Terraform &nbsp;·&nbsp; CI/CD</p>
+      <p class="hero-bio">
+        Cloud Engineering graduate from AltSchool Africa. Also a trained <strong>Medical Laboratory Scientist</strong> and <strong>UI/UX designer</strong>. I bring analytical thinking, process discipline, and the ability to learn anything I need to learn.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects →</a>
+        <a href="Baribefe_Gbara_CV.pdf" class="btn btn-outline" target="_blank">Download CV</a>
+        <a href="/cdn-cgi/l/email-protection#d2b5b0b3a0b3b0b3a0bbb0b7b4b792b5bfb3bbbefcb1bdbf" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-number">2</div>
+          <div class="stat-label">Cloud Projects Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">AWS Resources via IaC</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">85%</div>
+          <div class="stat-label">Docker Image Size Reduction</div>
+        </div>
+      </div>
+      <div class="hero-contact">
+        <div class="contact-row">
+          <svg class="contact-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          <a href="/cdn-cgi/l/email-protection#accbcecddecdcecddec5cec9cac9eccbc1cdc5c082cfc3c1"><span class="__cf_email__" data-cfemail="5730353625363536253e3532313217303a363e3b7934383a">[email&#160;protected]</span></a>
+        </div>
+        <div class="contact-row">
+          <svg class="contact-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          <a href="https://github.com/BaribefeGbara" target="_blank" rel="noopener" aria-label="Visit Baribefe Gbara GitHub profile">github.com/BaribefeGbara</a>
+        </div>
+        <div class="contact-row">
+          <svg class="contact-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          <a href="https://linkedin.com/in/baribefegbara" target="_blank" rel="noopener" aria-label="Visit Baribefe Gbara LinkedIn profile">linkedin.com/in/baribefegbara</a>
+        </div>
+        <div class="contact-row">
+          <svg class="contact-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>(+234) 8065097751 · Lagos, Nigeria</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">About</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <h2 class="section-title">Cloud engineer.<br>Medical scientist.<br>Designer.</h2>
+        <div class="about-text">
+          <p>I recently graduated with a Cloud Engineering Diploma from AltSchool Africa. Before that, I trained and worked as a Medical Laboratory Scientist, and alongside my internship I was doing freelance UI/UX design work.</p>
+          <p>That combination gives me a different way of thinking. My background in healthcare sharpened my analytical skills and taught me how to manage precision and process together. My design work taught me to think about who actually uses what you build.</p>
+          <p>I learn by reading documentation, testing things, breaking them, and trying again. I ask questions when I'm stuck, and I'm honest about what I don't know yet. I'm looking for a company that invests in junior engineers, values different perspectives, and gives real work to grow on.</p>
+        </div>
+        <p class="about-ux-note">Previously worked in UI/UX design — <a href="https://www.behance.net/BaribefeGbara" target="_blank" rel="noopener" aria-label="View Baribefe Gbara UI/UX portfolio on Behance">view selected work on Behance →</a></p>
+      </div>
+      <div>
+        <div class="journey-list">
+          <div class="journey-item">
+            <div class="journey-dot"></div>
+            <div>
+              <div class="journey-role">Cloud Engineering Graduate</div>
+              <div class="journey-org">AltSchool Africa · 2025–2026</div>
+              <div class="journey-desc">Deployed Kubernetes clusters, automated infrastructure with Terraform, built CI/CD pipelines. Completed two end-to-end cloud projects.</div>
+            </div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-dot"></div>
+            <div>
+              <div class="journey-role">Freelance UI/UX Designer</div>
+              <div class="journey-org">Self-employed · 2024–Present</div>
+              <div class="journey-desc">Designs healthcare and SaaS platforms in Figma. Works directly with developers to bridge design and implementation.</div>
+            </div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-dot"></div>
+            <div>
+              <div class="journey-role">Medical Laboratory Scientist Intern</div>
+              <div class="journey-org">National Orthopaedic Hospital Igbobi · 2024–2025</div>
+              <div class="journey-desc">Maintained strict quality control in a high-stakes clinical environment. Named Best Seminar Representative among all interns.</div>
+            </div>
+          </div>
+          <div class="journey-item">
+            <div class="journey-dot"></div>
+            <div>
+              <div class="journey-role">B.Sc. Medical Laboratory Sciences</div>
+              <div class="journey-org">University of Lagos · 2016–2024</div>
+              <div class="journey-desc">Built the research discipline and systematic problem-solving foundation that now drives my approach to cloud infrastructure.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section alt" id="skills">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Technical Skills</span>
+      <div class="section-rule"></div>
+    </div>
+    <h2 class="section-title">What I work with</h2>
+    <p class="section-sub">Built through hands-on projects, not just coursework.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-label">Cloud · AWS</div>
+        <div class="tags">
+          <span class="tag">EC2</span><span class="tag">EKS</span><span class="tag">VPC</span>
+          <span class="tag">S3</span><span class="tag">Lambda</span><span class="tag">IAM</span>
+          <span class="tag">CloudFront</span><span class="tag">Route53</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Containers & Orchestration</div>
+        <div class="tags">
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span>
+          <span class="tag">Multi-stage Builds</span><span class="tag">Docker Compose</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Infrastructure as Code</div>
+        <div class="tags">
+          <span class="tag">Terraform</span><span class="tag">CloudFormation</span>
+          <span class="tag">Remote State</span><span class="tag">Modules</span><span class="tag">YAML</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">CI/CD & Scripting</div>
+        <div class="tags">
+          <span class="tag">GitHub Actions</span><span class="tag">Git</span>
+          <span class="tag">Bash</span><span class="tag">Python</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Monitoring & Security</div>
+        <div class="tags">
+          <span class="tag">CloudWatch</span><span class="tag">RBAC</span>
+          <span class="tag">IAM Policies</span><span class="tag">Security Groups</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">What I Bring</div>
+        <div class="tags">
+          <span class="tag">Systematic Debugging</span><span class="tag">QA Mindset</span>
+          <span class="tag">Documentation</span><span class="tag">Linux</span><span class="tag">Figma</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Projects</span>
+      <div class="section-rule"></div>
+    </div>
+    <h2 class="section-title">Built from scratch</h2>
+    <p class="section-sub">End-to-end projects demonstrating real cloud engineering thinking, from network design to monitoring.</p>
+
+    <div class="projects-list">
+
+      <div class="project-card">
+        <div class="project-sidebar">
+          <div class="project-num">01</div>
+          <div>
+            <div class="project-date">Feb 2026</div>
+            <div class="project-org">AltSchool Africa · Capstone</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Cloud Infrastructure Deployment (Project Bedrock)</h3>
+          <p class="project-desc">Designed scalable AWS infrastructure for a 5-service containerised retail application using Terraform, EKS, and CI/CD pipelines with monitoring and logging enabled.</p>
+          <ul class="project-bullets">
+            <li>Designed a custom VPC with public/private subnets across 2 availability zones for fault tolerance</li>
+            <li>Deployed a 5-service containerised retail app to Amazon EKS with horizontal scaling and rolling updates</li>
+            <li>Implemented reproducible infrastructure provisioning using Terraform with remote S3 state and state locking</li>
+            <li>Built event-driven architecture: S3 bucket triggers Lambda function on file upload</li>
+            <li>Configured GitHub Actions CI/CD: terraform plan on PRs, terraform apply on merge to main</li>
+            <li>Enabled CloudWatch logging for EKS control plane and containers; applied IAM least-privilege RBAC</li>
+            <li>Designed VPC architecture with cost-aware node group sizing using t3.small managed instances</li>
+          </ul>
+          <div class="tech-row">
+            <span class="tech-tag">AWS EKS</span><span class="tech-tag">Terraform</span>
+            <span class="tech-tag">Kubernetes</span><span class="tech-tag">Docker</span>
+            <span class="tech-tag">GitHub Actions</span><span class="tech-tag">CloudWatch</span>
+            <span class="tech-tag">Lambda</span><span class="tech-tag">S3</span>
+            <span class="tech-tag">VPC</span><span class="tech-tag">IAM</span>
+          </div>
+          <a href="https://github.com/BaribefeGbara/bedrock-eks" target="_blank" rel="noopener" class="project-link" aria-label="View Project Bedrock on GitHub">View on GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-sidebar">
+          <div class="project-num">02</div>
+          <div>
+            <div class="project-date">Jan 2026</div>
+            <div class="project-org">AltSchool Africa</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Containerised Backend Application (MuchTodo)</h3>
+          <p class="project-desc">Containerised a Go REST API with MongoDB and Redis using multi-stage Docker builds, reducing image size by 85%, then deployed to Kubernetes with high availability and persistent storage.</p>
+          <ul class="project-bullets">
+            <li>Reduced Docker image size from 1.2GB to 15MB (85%) through multi-stage builds using Alpine Linux</li>
+            <li>Deployed to Kubernetes with 2 backend replicas, MongoDB StatefulSet, 10GB persistent storage, and Redis cache</li>
+            <li>Configured liveness and readiness health probes for automated failure recovery and traffic control</li>
+            <li>Implemented Docker Compose for local development. Single command starts all services</li>
+            <li>Created 15 Kubernetes manifests covering namespaces, secrets, configmaps, deployments, services, and PVCs</li>
+          </ul>
+          <div class="tech-row">
+            <span class="tech-tag">Docker</span><span class="tech-tag">Kubernetes</span>
+            <span class="tech-tag">Go</span><span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">Redis</span><span class="tech-tag">Docker Compose</span>
+          </div>
+          <a href="https://github.com/BaribefeGbara/StartTech-Baribefe-0985" target="_blank" rel="noopener" class="project-link" aria-label="View MuchTodo on GitHub">View on GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card featured">
+        <div class="project-sidebar">
+          <div class="project-num">03</div>
+          <div>
+            <div class="project-date">2026</div>
+            <div class="project-org">Personal Project</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="badge">★ This Site</div>
+          <h3 class="project-title">Cloud Engineer Portfolio Site</h3>
+          <p class="project-desc">Built this portfolio in HTML/CSS and deployed via GitHub Pages. Documented an equivalent AWS deployment: S3 static hosting, CloudFront CDN, Route53 DNS, provisioned with Terraform.</p>
+          <ul class="project-bullets">
+            <li>Built in pure HTML/CSS with no frameworks, no dependencies, fast and lightweight</li>
+            <li>Deployed on GitHub Pages with automated updates on every git push</li>
+            <li>Documented AWS equivalent: S3 static hosting + CloudFront CDN + Route53 DNS</li>
+            <li>Terraform configuration covering S3 bucket policies, IAM access, and CloudFront distribution</li>
+            <li>GitHub Actions workflow for automated deployment on push to main</li>
+          </ul>
+          <div class="tech-row">
+            <span class="tech-tag">HTML/CSS</span><span class="tech-tag">GitHub Pages</span>
+            <span class="tech-tag">AWS S3</span><span class="tech-tag">CloudFront</span>
+            <span class="tech-tag">Terraform</span><span class="tech-tag">Route53</span>
+            <span class="tech-tag">GitHub Actions</span>
+          </div>
+          <a href="https://github.com/BaribefeGbara" target="_blank" rel="noopener" class="project-link" aria-label="View portfolio source on GitHub">View on GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section alt" id="experience">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Experience</span>
+      <div class="section-rule"></div>
+    </div>
+    <h2 class="section-title" style="margin-bottom:44px">Where I've worked</h2>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Aug 2024 – Present</div>
+          <div class="exp-company">Freelance</div>
+        </div>
+        <div>
+          <div class="exp-title">UI/UX Designer</div>
+          <ul class="exp-bullets">
+            <li>Designs healthcare and SaaS platforms in Figma with a focus on usability and clear information architecture</li>
+            <li>Collaborates directly with developers to translate designs into working implementations</li>
+            <li>Conducts user research and usability testing to drive iterative improvements</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">May 2024 – May 2025</div>
+          <div class="exp-company">Natl. Orthopaedic Hospital Igbobi</div>
+        </div>
+        <div>
+          <div class="exp-title">Medical Laboratory Scientist Intern</div>
+          <ul class="exp-bullets">
+            <li>Maintained quality control procedures across laboratory workflows with strict accuracy standards</li>
+            <li>Documented processes and tracked samples through information systems and built deep documentation habits</li>
+            <li>Collaborated with medical teams in a time-sensitive, high-stakes clinical environment</li>
+          </ul>
+          <div class="achievement-badge">Named Best Seminar Representative among all interns</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:64px">
+      <div class="section-header">
+        <span class="section-label">Education</span>
+        <div class="section-rule"></div>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-degree">Cloud Engineering Diploma</div>
+          <div class="edu-school">AltSchool Africa</div>
+          <div class="edu-year">2025 – 2026</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">B.Sc. Medical Laboratory Sciences</div>
+          <div class="edu-school">University of Lagos</div>
+          <div class="edu-year">2016 – 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="contact-label">Get In Touch</div>
+      <h2 class="contact-heading">Open to junior cloud &amp; DevOps roles</h2>
+      <p class="contact-text">Available for remote and Lagos-based opportunities. I work hard, ask good questions, document everything, and I won't pretend to know things I don't. Give me real work and I'll make you glad you did.</p>
+    </div>
+    <div class="contact-links">
+      <a href="/cdn-cgi/l/email-protection#bcdbdeddcedddeddced5ded9dad9fcdbd1ddd5d092dfd3d1" class="contact-link-item" aria-label="Email Baribefe Gbara">
+        <div class="contact-link-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg></div>
+        <div><span class="contact-link-type">Email</span><span class="contact-link-value"><span class="__cf_email__" data-cfemail="6b0c090a190a090a1902090e0d0e2b0c060a020745080406">[email&#160;protected]</span></span></div>
+      </a>
+      <a href="https://linkedin.com/in/baribefegbara" target="_blank" rel="noopener" class="contact-link-item" aria-label="Baribefe Gbara LinkedIn">
+        <div class="contact-link-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div><span class="contact-link-type">LinkedIn</span><span class="contact-link-value">linkedin.com/in/baribefegbara</span></div>
+      </a>
+      <a href="https://github.com/BaribefeGbara" target="_blank" rel="noopener" class="contact-link-item" aria-label="Baribefe Gbara GitHub">
+        <div class="contact-link-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.
